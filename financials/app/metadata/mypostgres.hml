@@ -1,0 +1,980 @@
+kind: DataConnectorLink
+version: v1
+definition:
+  name: mypostgres
+  url:
+    readWriteUrls:
+      read:
+        valueFromEnv: APP_MYPOSTGRES_READ_URL
+      write:
+        valueFromEnv: APP_MYPOSTGRES_WRITE_URL
+  headers:
+    Authorization:
+      valueFromEnv: APP_MYPOSTGRES_AUTHORIZATION_HEADER
+  schema:
+    version: v0.1
+    schema:
+      scalar_types:
+        date:
+          representation:
+            type: date
+          aggregate_functions:
+            max:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: date
+            min:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: date
+          comparison_operators:
+            _eq:
+              type: equal
+            _gt:
+              type: custom
+              argument_type:
+                type: named
+                name: date
+            _gte:
+              type: custom
+              argument_type:
+                type: named
+                name: date
+            _in:
+              type: in
+            _lt:
+              type: custom
+              argument_type:
+                type: named
+                name: date
+            _lte:
+              type: custom
+              argument_type:
+                type: named
+                name: date
+            _neq:
+              type: custom
+              argument_type:
+                type: named
+                name: date
+        int4:
+          representation:
+            type: int32
+          aggregate_functions:
+            avg:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: numeric
+            bit_and:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: int4
+            bit_or:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: int4
+            bit_xor:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: int4
+            max:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: int4
+            min:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: int4
+            stddev:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: numeric
+            stddev_pop:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: numeric
+            stddev_samp:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: numeric
+            sum:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: int8
+            var_pop:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: numeric
+            var_samp:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: numeric
+            variance:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: numeric
+          comparison_operators:
+            _eq:
+              type: equal
+            _gt:
+              type: custom
+              argument_type:
+                type: named
+                name: int4
+            _gte:
+              type: custom
+              argument_type:
+                type: named
+                name: int4
+            _in:
+              type: in
+            _lt:
+              type: custom
+              argument_type:
+                type: named
+                name: int4
+            _lte:
+              type: custom
+              argument_type:
+                type: named
+                name: int4
+            _neq:
+              type: custom
+              argument_type:
+                type: named
+                name: int4
+        int8:
+          representation:
+            type: int64
+          aggregate_functions:
+            avg:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: numeric
+            bit_and:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: int8
+            bit_or:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: int8
+            bit_xor:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: int8
+            max:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: int8
+            min:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: int8
+            stddev:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: numeric
+            stddev_pop:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: numeric
+            stddev_samp:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: numeric
+            sum:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: numeric
+            var_pop:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: numeric
+            var_samp:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: numeric
+            variance:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: numeric
+          comparison_operators:
+            _eq:
+              type: equal
+            _gt:
+              type: custom
+              argument_type:
+                type: named
+                name: int8
+            _gte:
+              type: custom
+              argument_type:
+                type: named
+                name: int8
+            _in:
+              type: in
+            _lt:
+              type: custom
+              argument_type:
+                type: named
+                name: int8
+            _lte:
+              type: custom
+              argument_type:
+                type: named
+                name: int8
+            _neq:
+              type: custom
+              argument_type:
+                type: named
+                name: int8
+        numeric:
+          representation:
+            type: bigdecimal
+          aggregate_functions:
+            avg:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: numeric
+            max:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: numeric
+            min:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: numeric
+            stddev:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: numeric
+            stddev_pop:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: numeric
+            stddev_samp:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: numeric
+            sum:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: numeric
+            var_pop:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: numeric
+            var_samp:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: numeric
+            variance:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: numeric
+          comparison_operators:
+            _eq:
+              type: equal
+            _gt:
+              type: custom
+              argument_type:
+                type: named
+                name: numeric
+            _gte:
+              type: custom
+              argument_type:
+                type: named
+                name: numeric
+            _in:
+              type: in
+            _lt:
+              type: custom
+              argument_type:
+                type: named
+                name: numeric
+            _lte:
+              type: custom
+              argument_type:
+                type: named
+                name: numeric
+            _neq:
+              type: custom
+              argument_type:
+                type: named
+                name: numeric
+        text:
+          representation:
+            type: string
+          aggregate_functions:
+            max:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: text
+            min:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: text
+          comparison_operators:
+            _eq:
+              type: equal
+            _gt:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _gte:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _ilike:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _in:
+              type: in
+            _iregex:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _like:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _lt:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _lte:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _neq:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _nilike:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _niregex:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _nlike:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _nregex:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _regex:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            starts_with:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            ts_match_tt:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+        timestamptz:
+          representation:
+            type: timestamptz
+          aggregate_functions:
+            max:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: timestamptz
+            min:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: timestamptz
+          comparison_operators:
+            _eq:
+              type: equal
+            _gt:
+              type: custom
+              argument_type:
+                type: named
+                name: timestamptz
+            _gte:
+              type: custom
+              argument_type:
+                type: named
+                name: timestamptz
+            _in:
+              type: in
+            _lt:
+              type: custom
+              argument_type:
+                type: named
+                name: timestamptz
+            _lte:
+              type: custom
+              argument_type:
+                type: named
+                name: timestamptz
+            _neq:
+              type: custom
+              argument_type:
+                type: named
+                name: timestamptz
+        varchar:
+          representation:
+            type: string
+          aggregate_functions:
+            max:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: text
+            min:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: text
+          comparison_operators:
+            _eq:
+              type: equal
+            _gt:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _gte:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _ilike:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _in:
+              type: in
+            _iregex:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _like:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _lt:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _lte:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _neq:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _nilike:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _niregex:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _nlike:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _nregex:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _regex:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            starts_with:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            ts_match_tt:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+      object_types:
+        delete_financial_data_by_id_response:
+          description: Responses from the 'delete_financial_data_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                type: named
+                name: int4
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: financial_data
+        financial_data:
+          fields:
+            close_price:
+              type:
+                type: named
+                name: numeric
+            created_at:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: timestamptz
+            date:
+              type:
+                type: named
+                name: date
+            high_price:
+              type:
+                type: named
+                name: numeric
+            id:
+              type:
+                type: named
+                name: int4
+            low_price:
+              type:
+                type: named
+                name: numeric
+            open_price:
+              type:
+                type: named
+                name: numeric
+            stock_symbol:
+              type:
+                type: named
+                name: varchar
+            volume:
+              type:
+                type: named
+                name: numeric
+        insert_financial_data_object:
+          fields:
+            close_price:
+              type:
+                type: named
+                name: numeric
+            created_at:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: timestamptz
+            date:
+              type:
+                type: named
+                name: date
+            high_price:
+              type:
+                type: named
+                name: numeric
+            id:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: int4
+            low_price:
+              type:
+                type: named
+                name: numeric
+            open_price:
+              type:
+                type: named
+                name: numeric
+            stock_symbol:
+              type:
+                type: named
+                name: varchar
+            volume:
+              type:
+                type: named
+                name: numeric
+        insert_financial_data_response:
+          description: Responses from the 'insert_financial_data' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                type: named
+                name: int4
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: financial_data
+        update_column_financial_data_close_price:
+          description: Update the 'close_price' column in the 'financial_data' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: named
+                name: numeric
+        update_column_financial_data_created_at:
+          description: Update the 'created_at' column in the 'financial_data' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: timestamptz
+        update_column_financial_data_date:
+          description: Update the 'date' column in the 'financial_data' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: named
+                name: date
+        update_column_financial_data_high_price:
+          description: Update the 'high_price' column in the 'financial_data' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: named
+                name: numeric
+        update_column_financial_data_id:
+          description: Update the 'id' column in the 'financial_data' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: named
+                name: int4
+        update_column_financial_data_low_price:
+          description: Update the 'low_price' column in the 'financial_data' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: named
+                name: numeric
+        update_column_financial_data_open_price:
+          description: Update the 'open_price' column in the 'financial_data' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: named
+                name: numeric
+        update_column_financial_data_stock_symbol:
+          description: Update the 'stock_symbol' column in the 'financial_data' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: named
+                name: varchar
+        update_column_financial_data_volume:
+          description: Update the 'volume' column in the 'financial_data' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: named
+                name: numeric
+        update_financial_data_by_id_response:
+          description: Responses from the 'update_financial_data_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                type: named
+                name: int4
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: financial_data
+        update_financial_data_by_id_update_columns:
+          description: Update the columns of the 'financial_data' collection
+          fields:
+            close_price:
+              description: Update the 'close_price' column in the 'financial_data' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: update_column_financial_data_close_price
+            created_at:
+              description: Update the 'created_at' column in the 'financial_data' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: update_column_financial_data_created_at
+            date:
+              description: Update the 'date' column in the 'financial_data' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: update_column_financial_data_date
+            high_price:
+              description: Update the 'high_price' column in the 'financial_data' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: update_column_financial_data_high_price
+            id:
+              description: Update the 'id' column in the 'financial_data' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: update_column_financial_data_id
+            low_price:
+              description: Update the 'low_price' column in the 'financial_data' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: update_column_financial_data_low_price
+            open_price:
+              description: Update the 'open_price' column in the 'financial_data' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: update_column_financial_data_open_price
+            stock_symbol:
+              description: Update the 'stock_symbol' column in the 'financial_data' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: update_column_financial_data_stock_symbol
+            volume:
+              description: Update the 'volume' column in the 'financial_data' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: update_column_financial_data_volume
+      collections:
+        - name: financial_data
+          arguments: {}
+          type: financial_data
+          uniqueness_constraints:
+            financial_data_pkey:
+              unique_columns:
+                - id
+          foreign_keys: {}
+      functions: []
+      procedures:
+        - name: delete_financial_data_by_id
+          description: Delete any row on the 'financial_data' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                type: named
+                name: int4
+            pre_check:
+              description: Delete permission predicate over the 'financial_data' collection
+              type:
+                type: nullable
+                underlying_type:
+                  type: predicate
+                  object_type_name: financial_data
+          result_type:
+            type: named
+            name: delete_financial_data_by_id_response
+        - name: insert_financial_data
+          description: Insert into the financial_data table
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: insert_financial_data_object
+            post_check:
+              description: Insert permission predicate over the 'financial_data' collection
+              type:
+                type: nullable
+                underlying_type:
+                  type: predicate
+                  object_type_name: financial_data
+          result_type:
+            type: named
+            name: insert_financial_data_response
+        - name: update_financial_data_by_id
+          description: Update any row on the 'financial_data' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                type: named
+                name: int4
+            post_check:
+              description: Update permission post-condition predicate over the 'financial_data' collection
+              type:
+                type: nullable
+                underlying_type:
+                  type: predicate
+                  object_type_name: financial_data
+            pre_check:
+              description: Update permission pre-condition predicate over the 'financial_data' collection
+              type:
+                type: nullable
+                underlying_type:
+                  type: predicate
+                  object_type_name: financial_data
+            update_columns:
+              type:
+                type: named
+                name: update_financial_data_by_id_update_columns
+          result_type:
+            type: named
+            name: update_financial_data_by_id_response
+    capabilities:
+      version: 0.1.6
+      capabilities:
+        query:
+          aggregates: {}
+          variables: {}
+          explain: {}
+          nested_fields:
+            filter_by: {}
+            order_by: {}
+          exists:
+            nested_collections: {}
+        mutation:
+          transactional: {}
+          explain: {}
+        relationships:
+          relation_comparisons: {}
+          order_by_aggregate: {}

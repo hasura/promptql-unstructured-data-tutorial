@@ -1,0 +1,208 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: financial_data
+  fields:
+    - name: close_price
+      type: numeric!
+      description: >-
+        The final trading price of the stock at market close, representing the day's ending value. Example: 150.75 (meaning $150.75 per share)
+    - name: created_at
+      type: timestamptz
+      description: >-
+        Timestamp when this record was created in the database. Example: 2024-03-20 14:30:00+00
+    - name: date
+      type: date!
+      description: >-
+        The trading date for this stock market data entry. Example: 2020-03-15 (follows YYYY-MM-DD format)
+    - name: high_price
+      type: numeric!
+      description: >-
+        The highest price the stock reached during the trading day. Example: 152.50 (if the stock peaked at $152.50 during trading)
+    - name: id
+      type: int_4!
+      description: >-
+        Unique identifier for each financial data record. Example: 1234 (auto-incrementing integer)
+    - name: low_price
+      type: numeric!
+      description: >-
+        The lowest price the stock reached during the trading day. Example: 148.25 (if the stock dipped to $148.25 during trading)
+    - name: open_price
+      type: numeric!
+      description: >-
+        The initial trading price of the stock when the market opened. Example: 149.00 (meaning the stock started trading at $149.00)
+    - name: stock_symbol
+      type: varchar!
+      description: >-
+        The unique ticker symbol identifying the company on the stock exchange. Examples: AAPL (Apple Inc.), MSFT (Microsoft), GOOGL (Alphabet/Google), AMZN (Amazon)
+    - name: volume
+      type: numeric!
+      description: >-
+        The total number of shares traded during the day, indicating market activity level. Example: 1250000 (meaning 1.25 million shares were traded that day)
+  graphql:
+    typeName: financial_data
+    inputTypeName: financial_data_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: mypostgres
+      dataConnectorObjectType: financial_data
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: financial_data
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - close_price
+          - created_at
+          - date
+          - high_price
+          - id
+          - low_price
+          - open_price
+          - stock_symbol
+          - volume
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: financial_data_bool_exp
+  operand:
+    object:
+      type: financial_data
+      comparableFields:
+        - fieldName: close_price
+          booleanExpressionType: numeric_bool_exp
+        - fieldName: created_at
+          booleanExpressionType: timestamptz_bool_exp
+        - fieldName: date
+          booleanExpressionType: date_bool_exp
+        - fieldName: high_price
+          booleanExpressionType: numeric_bool_exp
+        - fieldName: id
+          booleanExpressionType: int_4_bool_exp
+        - fieldName: low_price
+          booleanExpressionType: numeric_bool_exp
+        - fieldName: open_price
+          booleanExpressionType: numeric_bool_exp
+        - fieldName: stock_symbol
+          booleanExpressionType: varchar_bool_exp
+        - fieldName: volume
+          booleanExpressionType: numeric_bool_exp
+      comparableRelationships: []
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: financial_data_bool_exp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: financial_data_agg_exp
+  operand:
+    object:
+      aggregatedType: financial_data
+      aggregatableFields:
+        - fieldName: close_price
+          aggregateExpression: numeric_agg_exp
+        - fieldName: created_at
+          aggregateExpression: timestamptz_agg_exp
+        - fieldName: date
+          aggregateExpression: date_agg_exp
+        - fieldName: high_price
+          aggregateExpression: numeric_agg_exp
+        - fieldName: id
+          aggregateExpression: int_4_agg_exp
+        - fieldName: low_price
+          aggregateExpression: numeric_agg_exp
+        - fieldName: open_price
+          aggregateExpression: numeric_agg_exp
+        - fieldName: stock_symbol
+          aggregateExpression: varchar_agg_exp
+        - fieldName: volume
+          aggregateExpression: numeric_agg_exp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: financial_data_agg_exp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: financial_data_order_by_exp
+  operand:
+    object:
+      orderedType: financial_data
+      orderableFields:
+        - fieldName: close_price
+          orderByExpression: numeric_order_by_exp
+        - fieldName: created_at
+          orderByExpression: timestamptz_order_by_exp
+        - fieldName: date
+          orderByExpression: date_order_by_exp
+        - fieldName: high_price
+          orderByExpression: numeric_order_by_exp
+        - fieldName: id
+          orderByExpression: int_4_order_by_exp
+        - fieldName: low_price
+          orderByExpression: numeric_order_by_exp
+        - fieldName: open_price
+          orderByExpression: numeric_order_by_exp
+        - fieldName: stock_symbol
+          orderByExpression: varchar_order_by_exp
+        - fieldName: volume
+          orderByExpression: numeric_order_by_exp
+      orderableRelationships: []
+  graphql:
+    expressionTypeName: financial_data_order_by_exp
+
+---
+kind: Model
+version: v2
+definition:
+  name: financial_data
+  objectType: financial_data
+  description: >-
+    Historical stock market data for major companies, including daily price movements and trading volume. Example companies include AAPL (Apple), MSFT (Microsoft), NVDA (NVIDIA), etc.
+  source:
+    dataConnectorName: mypostgres
+    collection: financial_data
+  filterExpressionType: financial_data_bool_exp
+  aggregateExpression: financial_data_agg_exp
+  orderByExpression: financial_data_order_by_exp
+  graphql:
+    selectMany:
+      queryRootField: financial_data
+      subscription:
+        rootField: financial_data
+    selectUniques:
+      - queryRootField: financial_data_by_id
+        uniqueIdentifier:
+          - id
+        subscription:
+          rootField: financial_data_by_id
+    filterInputTypeName: financial_data_filter_input
+    aggregate:
+      queryRootField: financial_data_aggregate
+      subscription:
+        rootField: financial_data_aggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: financial_data
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+

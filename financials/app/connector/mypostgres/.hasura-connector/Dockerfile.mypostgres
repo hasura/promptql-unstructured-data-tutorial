@@ -1,0 +1,2 @@
+FROM ghcr.io/hasura/ndc-postgres:v2.1.0
+COPY ./ /etc/connector

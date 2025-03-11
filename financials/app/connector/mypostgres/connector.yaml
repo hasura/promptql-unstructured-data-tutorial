@@ -1,0 +1,18 @@
+kind: Connector
+version: v2
+definition:
+  name: mypostgres
+  subgraph: app
+  source: hasura/postgres:v2.1.0
+  context: .
+  envMapping:
+    CONNECTION_URI:
+      fromEnv: APP_MYPOSTGRES_CONNECTION_URI
+    HASURA_CONNECTOR_PORT:
+      fromEnv: APP_MYPOSTGRES_HASURA_CONNECTOR_PORT
+    HASURA_SERVICE_TOKEN_SECRET:
+      fromEnv: APP_MYPOSTGRES_HASURA_SERVICE_TOKEN_SECRET
+    OTEL_EXPORTER_OTLP_ENDPOINT:
+      fromEnv: APP_MYPOSTGRES_OTEL_EXPORTER_OTLP_ENDPOINT
+    OTEL_SERVICE_NAME:
+      fromEnv: APP_MYPOSTGRES_OTEL_SERVICE_NAME
