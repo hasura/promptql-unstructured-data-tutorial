@@ -2,10 +2,9 @@
 
 Getting 100% accurate answers on financial questions from unstructured data using PromptQL
 
-Questions:
+Question:
 
 - "Get me all the companies for year X which have a growth greater than 10%. And what is the reason for its growth?"
-- "Give me the 3 most interesting companies in 2020 and explain why"
 
 ## Contents
 
