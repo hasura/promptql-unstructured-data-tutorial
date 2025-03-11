@@ -1,4 +1,4 @@
-# Financials
+# PromptQL Unstructured Data Tutorial
 
 Getting 100% accurate answers on financial questions from unstructured data using PromptQL
 
