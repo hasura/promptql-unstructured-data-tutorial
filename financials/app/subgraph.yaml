@@ -8,6 +8,12 @@ definition:
   includePaths:
     - metadata
   envMapping:
+    APP_BUSINESSLOGIC_AUTHORIZATION_HEADER:
+      fromEnv: APP_BUSINESSLOGIC_AUTHORIZATION_HEADER
+    APP_BUSINESSLOGIC_READ_URL:
+      fromEnv: APP_BUSINESSLOGIC_READ_URL
+    APP_BUSINESSLOGIC_WRITE_URL:
+      fromEnv: APP_BUSINESSLOGIC_WRITE_URL
     APP_MYPOSTGRES_AUTHORIZATION_HEADER:
       fromEnv: APP_MYPOSTGRES_AUTHORIZATION_HEADER
     APP_MYPOSTGRES_READ_URL:
@@ -17,3 +23,5 @@ definition:
   connectors:
     - path: connector/mypostgres/connector.yaml
       connectorLinkName: mypostgres
+    - path: connector/businesslogic/connector.yaml
+      connectorLinkName: businesslogic

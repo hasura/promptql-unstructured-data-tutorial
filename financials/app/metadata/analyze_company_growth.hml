@@ -1,0 +1,109 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: growth_analysis
+  fields:
+    - name: confidence
+      type: Float!
+    - name: growth_trends
+      type: "[String!]!"
+    - name: relevant_quotes
+      type: "[String!]!"
+    - name: stock_symbol
+      type: String!
+    - name: end_date
+      type: String!
+    - name: growth_percentage
+      type: Float!
+    - name: quarters_covered
+      type: Float!
+    - name: start_date
+      type: String!
+  graphql:
+    typeName: growth_analysis
+    inputTypeName: growth_analysis_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: businesslogic
+      dataConnectorObjectType: GrowthAnalysis
+      fieldMapping:
+        confidence:
+          column:
+            name: confidence
+        growth_trends:
+          column:
+            name: growthTrends
+        relevant_quotes:
+          column:
+            name: relevantQuotes
+        stock_symbol:
+          column:
+            name: stockSymbol
+        end_date:
+          column:
+            name: endDate
+        growth_percentage:
+          column:
+            name: growthPercentage
+        quarters_covered:
+          column:
+            name: quartersCovered
+        start_date:
+          column:
+            name: startDate
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: growth_analysis
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - confidence
+          - growth_trends
+          - relevant_quotes
+          - stock_symbol
+          - end_date
+          - growth_percentage
+          - quarters_covered
+          - start_date
+
+---
+kind: Command
+version: v1
+definition:
+  name: analyze_company_growth
+  outputType: growth_analysis!
+  arguments:
+    - name: stock_symbol
+      type: String!
+    - name: end_date
+      type: String!
+    - name: growth_percentage
+      type: Float!
+    - name: start_date
+      type: String!
+  source:
+    dataConnectorName: businesslogic
+    dataConnectorCommand:
+      function: analyzeCompanyGrowth
+    argumentMapping:
+      stock_symbol: stockSymbol
+      end_date: endDate
+      growth_percentage: growthPercentage
+      start_date: startDate
+  graphql:
+    rootFieldName: analyze_company_growth
+    rootFieldKind: Query
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: analyze_company_growth
+  permissions:
+    - role: admin
+      allowExecution: true
+

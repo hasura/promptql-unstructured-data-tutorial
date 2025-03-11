@@ -1,0 +1,20 @@
+kind: Connector
+version: v2
+definition:
+  name: businesslogic
+  subgraph: app
+  source: hasura/nodejs:v1.11.0
+  context: .
+  envMapping:
+    HASURA_CONNECTOR_PORT:
+      fromEnv: APP_BUSINESSLOGIC_HASURA_CONNECTOR_PORT
+    HASURA_SERVICE_TOKEN_SECRET:
+      fromEnv: APP_BUSINESSLOGIC_HASURA_SERVICE_TOKEN_SECRET
+    OTEL_EXPORTER_OTLP_ENDPOINT:
+      fromEnv: APP_BUSINESSLOGIC_OTEL_EXPORTER_OTLP_ENDPOINT
+    OTEL_SERVICE_NAME:
+      fromEnv: APP_BUSINESSLOGIC_OTEL_SERVICE_NAME
+    OPENAI_API_KEY:
+      fromEnv: APP_BUSINESSLOGIC_OPENAI_API_KEY
+    DATABASE_URL:
+      fromEnv: APP_MYPOSTGRES_CONNECTION_URI

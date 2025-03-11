@@ -1,5 +1,6 @@
 include:
   - path: app/connector/mypostgres/compose.yaml
+  - path: app/connector/businesslogic/compose.yaml
 services:
   engine:
     build:

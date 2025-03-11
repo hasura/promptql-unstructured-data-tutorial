@@ -1,0 +1,101 @@
+kind: DataConnectorLink
+version: v1
+definition:
+  name: businesslogic
+  url:
+    readWriteUrls:
+      read:
+        valueFromEnv: APP_BUSINESSLOGIC_READ_URL
+      write:
+        valueFromEnv: APP_BUSINESSLOGIC_WRITE_URL
+  headers:
+    Authorization:
+      valueFromEnv: APP_BUSINESSLOGIC_AUTHORIZATION_HEADER
+  schema:
+    version: v0.1
+    schema:
+      scalar_types:
+        Float:
+          representation:
+            type: float64
+          aggregate_functions: {}
+          comparison_operators:
+            _eq:
+              type: equal
+        String:
+          representation:
+            type: string
+          aggregate_functions: {}
+          comparison_operators:
+            _eq:
+              type: equal
+      object_types:
+        GrowthAnalysis:
+          fields:
+            confidence:
+              type:
+                type: named
+                name: Float
+            endDate:
+              type:
+                type: named
+                name: String
+            growthPercentage:
+              type:
+                type: named
+                name: Float
+            growthTrends:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: String
+            quartersCovered:
+              type:
+                type: named
+                name: Float
+            relevantQuotes:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: String
+            startDate:
+              type:
+                type: named
+                name: String
+            stockSymbol:
+              type:
+                type: named
+                name: String
+      collections: []
+      functions:
+        - name: analyzeCompanyGrowth
+          arguments:
+            endDate:
+              type:
+                type: named
+                name: String
+            growthPercentage:
+              type:
+                type: named
+                name: Float
+            startDate:
+              type:
+                type: named
+                name: String
+            stockSymbol:
+              type:
+                type: named
+                name: String
+          result_type:
+            type: named
+            name: GrowthAnalysis
+      procedures: []
+    capabilities:
+      version: 0.1.6
+      capabilities:
+        query:
+          variables: {}
+          nested_fields: {}
+        mutation: {}

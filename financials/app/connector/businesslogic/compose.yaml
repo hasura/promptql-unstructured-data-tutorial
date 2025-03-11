@@ -1,0 +1,15 @@
+services:
+  app_businesslogic:
+    build:
+      context: .
+      dockerfile: .hasura-connector/Dockerfile
+    environment:
+      HASURA_SERVICE_TOKEN_SECRET: $APP_BUSINESSLOGIC_HASURA_SERVICE_TOKEN_SECRET
+      OTEL_EXPORTER_OTLP_ENDPOINT: $APP_BUSINESSLOGIC_OTEL_EXPORTER_OTLP_ENDPOINT
+      OTEL_SERVICE_NAME: $APP_BUSINESSLOGIC_OTEL_SERVICE_NAME
+      OPENAI_API_KEY: $APP_BUSINESSLOGIC_OPENAI_API_KEY
+      DATABASE_URL: $APP_MYPOSTGRES_CONNECTION_URI
+    extra_hosts:
+      - local.hasura.dev:host-gateway
+    ports:
+      - 4273:8080
